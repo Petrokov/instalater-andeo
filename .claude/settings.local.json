@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(cp \"C:/Users/tlojen/.claude/projects/c--Users-tlojen-Desktop-Petrokov-Web-Petrokov-instalater-an-eo-novo-web-instalater-andeo/c5d1b7c6-c7b1-4a40-9fb0-1a60df9fe6a1/tool-results/webfetch-1777295014278-0b2r7x.bin\" /tmp/design.gz)",
+      "Bash(gunzip -c /tmp/design.gz)"
+    ]
+  }
+}
