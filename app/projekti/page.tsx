@@ -64,7 +64,7 @@ export default async function ProjektiPage() {
             </RevealOnScroll>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {featured.map((p, i) => (
-                <RevealOnScroll key={p.id} delay={i * 100}>
+                <RevealOnScroll key={p.id} delay={i * 100} className="h-full">
                   <ProjectCard project={p} featured />
                 </RevealOnScroll>
               ))}
@@ -87,7 +87,7 @@ export default async function ProjektiPage() {
               )}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {rest.map((p, i) => (
-                  <RevealOnScroll key={p.id} delay={(i % 3) * 100}>
+                  <RevealOnScroll key={p.id} delay={(i % 3) * 100} className="h-full">
                     <ProjectCard project={p} />
                   </RevealOnScroll>
                 ))}

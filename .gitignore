@@ -10,3 +10,7 @@ uploads/
 PRODUCT.md
 STYLEGUIDE.md
 hero-bg.png
+andeo-next/
+tmp-next-dev-*.log
+next-env.d.ts
+*.tsbuildinfo

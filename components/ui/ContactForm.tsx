@@ -194,20 +194,22 @@ export function ContactForm() {
                 type="checkbox"
                 required
                 className="w-[18px] h-[18px] mt-0.5 shrink-0 accent-dark"
-                aria-label="Prihvaćam uvjete korištenja i politiku privatnosti"
+                aria-required="true"
               />
               <span className="text-[13px] text-secondary leading-[1.5]">
                 Prihvaćam{' '}
-                <a href="/pravila-koristenja-i-privatnosti" className="text-dark font-semibold underline">
-                  uvjete korištenja
-                </a>{' '}
-                i{' '}
-                <a href="/pravila-koristenja-i-privatnosti" className="text-dark font-semibold underline">
-                  politiku privatnosti
+                <a
+                  href="/pravila-koristenja-i-privatnosti"
+                  className="text-dark font-semibold underline underline-offset-2 hover:text-dark/70 transition-colors"
+                >
+                  Pravila korištenja i privatnosti
                 </a>
-                . Podaci se koriste isključivo u svrhu obrade prijave.
+                .
               </span>
             </label>
+            <p className="text-[11px] text-secondary/70 leading-[1.5] mt-1.5 ml-[28px]">
+              Slanjem upita potvrđujete da ste upoznati s pravilima korištenja web stranice i načinom obrade osobnih podataka.
+            </p>
           </div>
 
           {/* Error */}

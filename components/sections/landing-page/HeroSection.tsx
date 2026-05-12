@@ -79,7 +79,7 @@ export function HeroSection() {
       </div>
 
       <div
-        className="absolute bottom-9 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-bounce"
+        className="absolute bottom-9 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-[scrollHint_2.4s_ease-in-out_infinite]"
         aria-hidden="true"
       >
         <span className="text-[11px] text-white/40 tracking-[0.08em] uppercase">Scroll</span>
@@ -90,6 +90,11 @@ export function HeroSection() {
         @keyframes fadeInCard {
           from { opacity: 0; transform: translateX(-28px); }
           to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scrollHint {
+          0%, 100% { opacity: 0.35; transform: translateY(0); }
+          50%       { opacity: 0.65; transform: translateY(6px); }
         }
 
         .hero-glass {
@@ -104,6 +109,11 @@ export function HeroSection() {
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
           }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-glass { animation: none !important; }
+          [class*="animate-"] { animation: none !important; }
         }
       `}</style>
     </section>

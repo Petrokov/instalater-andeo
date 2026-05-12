@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 import './globals.css'
 import { ConditionalLayout } from '@/components/layout/ConditionalLayout'
-import { organizationSchema, faqSchema, websiteSchema } from '@/lib/schema'
+import { organizationSchema, websiteSchema } from '@/lib/schema'
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -86,10 +86,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
       <body className="font-sans antialiased">

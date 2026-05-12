@@ -60,7 +60,7 @@ export default async function AdminProjektiPage() {
             {projects.map((p) => (
               <div
                 key={p.id}
-                className="bg-white rounded-[16px] p-4 shadow-[0_2px_12px_rgba(0,0,0,0.05)] flex items-center gap-4"
+                className="bg-white rounded-[16px] p-4 shadow-[0_2px_12px_rgba(0,0,0,0.05)] flex items-center gap-4 h-[96px]"
               >
                 {/* Thumbnail */}
                 <div className="relative w-16 h-16 rounded-[10px] overflow-hidden bg-[#f0efe8] shrink-0">

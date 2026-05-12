@@ -1,5 +1,6 @@
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
+import { PhotoFlipCard } from '@/components/ui/PhotoFlipCard'
 
 const values = [
   {
@@ -22,21 +23,38 @@ const values = [
 export function MisijaSection() {
   return (
     <section id="o-projektu" className="py-[clamp(64px,8vw,120px)] px-[5%] bg-white" aria-labelledby="misija-title">
-      <RevealOnScroll>
-        <div className="max-w-[760px] mx-auto text-center mb-[clamp(48px,6vw,80px)]">
-          <SectionLabel>O projektu</SectionLabel>
-          <h2 id="misija-title" className="text-[clamp(24px,3vw,40px)] font-extrabold leading-[1.2] mb-4">
-            Obnavljamo kupaonice, ali vraćamo puno više od toga.
-          </h2>
-          <p className="text-[clamp(15px,1.2vw,18px)] leading-[1.7] text-secondary mx-auto">
-            Instalater Anđeo je zajednica dobrih ljudi koji svojim znanjem, vremenom i trudom
-            mijenjaju živote onih koji su se našli u najtežim trenucima. Svaki završeni projekt
-            nije samo nova pločica ili slavina - to je poruka da netko nije zaboravljen.
-          </p>
-        </div>
-      </RevealOnScroll>
-
       <div className="max-w-[1100px] mx-auto">
+
+        {/* Split header */}
+        <RevealOnScroll>
+          <div className="mb-[clamp(28px,3.5vw,44px)]"><SectionLabel>O projektu</SectionLabel></div>
+
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_clamp(280px,38%,440px)] gap-[clamp(32px,5vw,72px)] items-center mb-[clamp(48px,6vw,80px)]">
+            {/* Text */}
+            <div>
+              <h2
+                id="misija-title"
+                className="text-[clamp(24px,3vw,40px)] font-extrabold leading-[1.2] mb-[clamp(16px,2vw,24px)]"
+              >
+                Obnavljamo kupaonice, ali vraćamo puno više od toga.
+              </h2>
+              <p className="text-[clamp(15px,1.2vw,18px)] leading-[1.7] text-secondary max-w-[62ch]">
+                Instalater Anđeo je zajednica dobrih ljudi koji svojim znanjem, vremenom i trudom
+                mijenjaju živote onih koji su se našli u najtežim trenucima. Svaki završeni projekt
+                nije samo nova pločica ili slavina, to je poruka da netko nije zaboravljen.
+              </p>
+            </div>
+
+            <PhotoFlipCard
+              front={{ src: '/images/kupaonica/20251202_095721.webp', alt: 'Obnovljena kupaonica' }}
+              back={{ src: '/images/kupaonica/IMG_20251027_090853.webp', alt: 'Instalater Anđeo - radovi na obnovi kupaonice' }}
+              className="relative w-full aspect-[3/2] md:aspect-[4/5] bg-white"
+              sizes="(max-width: 768px) 100vw, 44vw"
+            />
+          </div>
+        </RevealOnScroll>
+
+        {/* Values */}
         {values.map((v, i) => (
           <RevealOnScroll key={v.n} delay={i * 100}>
             <div
@@ -59,6 +77,7 @@ export function MisijaSection() {
             </div>
           </RevealOnScroll>
         ))}
+
       </div>
     </section>
   )

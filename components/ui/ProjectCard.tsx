@@ -21,7 +21,7 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
   return (
     <Link
       href={`/projekti/${project.slug}`}
-      className="group block bg-white rounded-[20px] overflow-hidden shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1 no-underline"
+      className="group flex flex-col h-full bg-white rounded-[20px] overflow-hidden shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1 no-underline"
     >
       {/* Image */}
       <div className={`relative overflow-hidden bg-[#f0efe8] ${featured ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
@@ -50,7 +50,7 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-3">
           <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full capitalize ${categoryColor(project.category)}`}>
             {project.category}

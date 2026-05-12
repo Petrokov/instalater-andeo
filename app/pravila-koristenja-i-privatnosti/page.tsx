@@ -5,7 +5,7 @@ const sections = [
     title: '1. Kontakt podaci voditelja obrade',
     items: [
       'Naziv: Petrokov d.o.o.',
-      'Sjedište: Mrkšina ulica 52d, 10020 Zagreb',
+      'Sjedište: Mrkšina ulica 52D, 10000 Zagreb',
       'E-mail: petrokov@petrokov.hr',
       'Telefonski kontakt: +385 1 6473 111',
       'Predstavnik u EU: nije primjenjivo',
@@ -41,7 +41,7 @@ const sections = [
   },
   {
     title: '7. Razdoblje pohrane podataka',
-    body: 'Osobni podaci prikupljeni putem kontakt obrasca čuvaju se najdulje do kraja 2025. godine, odnosno do zaključenja humanitarne akcije.',
+    body: 'Osobni podaci prikupljeni putem kontakt obrasca čuvaju se najdulje do kraja 2026. godine, odnosno do zaključenja humanitarne akcije.',
   },
   {
     title: '8. Legitimni interes',
@@ -111,7 +111,7 @@ export default function PravilaKoristenjaIPrivatnostiPage() {
             Politika privatnosti - Petrokov Anđeo
           </h1>
           <p className="text-[clamp(15px,1.2vw,18px)] leading-[1.8] text-secondary">
-            Petrokov d.o.o., Mrkšina ulica 52d, 10020 Zagreb, OIB: 42599613313, kao voditelj obrade osobnih podataka,
+            Petrokov d.o.o., Mrkšina ulica 52D, 10000 Zagreb, OIB: 42599613313, kao voditelj obrade osobnih podataka,
             posvećen je zaštiti privatnosti korisnika web stranice projekta Instalater Anđeo. Sve obrade osobnih
             podataka provode se u skladu s Uredbom (EU) 2016/679 (GDPR) i Zakonom o provedbi Opće uredbe o zaštiti
             podataka.

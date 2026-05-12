@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
+import { faqSchema } from '@/lib/schema'
 import { ONameHeroSection } from '@/components/sections/o-nama/ONameHeroSection'
 import { MisijaVizija } from '@/components/sections/o-nama/MisijaVizija'
 import { KakoDjelujeSection } from '@/components/sections/o-nama/KakoDjelujeSection'
 import { ImpactSection } from '@/components/sections/shared/ImpactSection'
+import { FaqSection } from '@/components/sections/o-nama/FaqSection'
 import { CitatSection } from '@/components/sections/shared/CitatSection'
 import { PrijavaSection } from '@/components/sections/shared/PrijavaSection'
 import { PartneriSection } from '@/components/sections/shared/PartneriSection'
@@ -151,6 +153,11 @@ export default function ONamaPage() {
       <KakoDjelujeSection />
       <ImpactSection />
       <PrijavaSection contactHref="/#kontakt-trebam" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <FaqSection />
       <CitatSection />
       <PartneriSection />
     </>

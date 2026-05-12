@@ -19,10 +19,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${project.title} - Instalater Anđeo`,
     description: project.short_description,
+    alternates: {
+      canonical: `https://instalaterandeo.hr/projekti/${slug}`,
+    },
     openGraph: {
+      type: 'article',
+      url: `https://instalaterandeo.hr/projekti/${slug}`,
       title: project.title,
       description: project.short_description,
-      images: project.cover_image ? [project.cover_image] : [],
+      images: project.cover_image
+        ? [{ url: project.cover_image, width: 1200, height: 630, alt: project.title }]
+        : [{ url: '/hero-bg.png', width: 1200, height: 630, alt: project.title }],
+      publishedTime: project.project_date ?? undefined,
+      authors: ['Petrokov d.o.o.'],
     },
   }
 }
@@ -38,8 +47,47 @@ export default async function ProjectDetailPage({ params }: Props) {
     ? new Date(project.project_date).toLocaleDateString('hr-HR', { month: 'long', year: 'numeric' })
     : null
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Početna', item: 'https://instalaterandeo.hr' },
+      { '@type': 'ListItem', position: 2, name: 'Projekti', item: 'https://instalaterandeo.hr/projekti' },
+      { '@type': 'ListItem', position: 3, name: project.title, item: `https://instalaterandeo.hr/projekti/${slug}` },
+    ],
+  }
+
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `https://instalaterandeo.hr/projekti/${slug}`,
+    headline: project.title,
+    description: project.short_description,
+    datePublished: project.project_date ?? new Date().toISOString().split('T')[0],
+    dateModified: project.project_date ?? new Date().toISOString().split('T')[0],
+    author: {
+      '@type': 'Organization',
+      name: 'Petrokov d.o.o.',
+      url: 'https://petrokov.hr',
+    },
+    publisher: { '@id': 'https://instalaterandeo.hr/#organization' },
+    image: project.cover_image
+      ? { '@type': 'ImageObject', url: project.cover_image }
+      : 'https://instalaterandeo.hr/hero-bg.png',
+    inLanguage: 'hr-HR',
+    isPartOf: { '@id': 'https://instalaterandeo.hr/#website' },
+  }
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {/* Cover hero */}
       <div className="relative bg-dark pt-[72px]">
         {project.cover_image ? (

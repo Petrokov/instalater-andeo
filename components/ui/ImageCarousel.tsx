@@ -3,11 +3,18 @@
 import Image from 'next/image'
 import { useState, useEffect, useRef, useCallback } from 'react'
 
-// Add more renovation photos to this array as they become available
 const slides = [
-  { src: '/uploads/inst-and-img.png', alt: 'Obnovljena kupaonica - Instalater Anđeo' },
-  { src: '/hero-bg.png', alt: 'Instalater Anđeo volonteri na poslu' },
-  { src: '/uploads/inst-and-img.png', alt: 'Obnova kupaonice za obitelj' },
+  { src: '/images/kupaonica/IMG-20251022-WA0012.webp',  alt: 'Kupaonica prije obnove' },
+  { src: '/images/kupaonica/IMG-20251030-WA0003.webp',  alt: 'Detalj kupaonice' },
+  { src: '/images/kupaonica/IMG-20251103-WA0002.webp',  alt: 'Obnovljena kupaonica - projekt 2' },
+  { src: '/images/kupaonica/IMG-20251103-WA0004.webp',  alt: 'Nova kupaonica - projekt 2' },
+  { src: '/images/kupaonica/IMG-20251119-WA0006.webp',  alt: 'Kupaonica u tijeku obnove' },
+  { src: '/images/kupaonica/IMG-20251119-WA0012.webp',  alt: 'Završena obnova kupaonice' },
+  { src: '/images/kupaonica/20251202_095721.webp',      alt: 'Obnovljena kupaonica - projekt 1' },
+  { src: '/images/kupaonica/20251202_095846.webp',      alt: 'Nova pločica i sanitarija' },
+  { src: '/images/kupaonica/IMG_20251027_090853.webp',  alt: 'Instalaterski radovi u kupaonici' },
+  { src: '/images/kupaonica/1000045719.webp',           alt: 'Obnovljena kupaonica - projekt 3' },
+  { src: '/images/kupaonica/1000045724.webp',           alt: 'Novi sanitarni čvor' },
 ]
 
 function imageStyle(

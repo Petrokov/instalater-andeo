@@ -18,14 +18,16 @@ export const organizationSchema = {
   ],
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+385-1-4000-000',
+    telephone: '+385-1-6473-111',
     email: 'andeo@petrokov.hr',
     contactType: 'customer support',
     availableLanguage: { '@type': 'Language', name: 'Croatian' },
   },
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Mrkšina ulica 52D',
     addressLocality: 'Zagreb',
+    postalCode: '10000',
     addressCountry: 'HR',
   },
   areaServed: [
@@ -35,13 +37,21 @@ export const organizationSchema = {
     { '@type': 'City', name: 'Đakovo' },
     { '@type': 'City', name: 'Pula' },
   ],
+  founder: {
+    '@type': 'Organization',
+    name: 'Petrokov d.o.o.',
+    url: 'https://petrokov.hr',
+  },
   parentOrganization: {
     '@type': 'Corporation',
     name: 'Petrokov d.o.o.',
+    url: 'https://petrokov.hr',
     taxID: '42599613313',
     address: {
       '@type': 'PostalAddress',
+      streetAddress: 'Mrkšina ulica 52D',
       addressLocality: 'Zagreb',
+      postalCode: '10000',
       addressCountry: 'HR',
     },
   },
