@@ -5,6 +5,7 @@ import { createServerClient } from '@/lib/supabase-server'
 import type { PrijavaVrsta } from '@/lib/database.types'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { sendPrijavaNotification, sendPrijavaConfirmation } from '@/lib/email'
+import { hasValidImageSignature } from '@/lib/image-validation'
 
 export type SubmitResult = { success: true } | { success: false; error: string }
 
@@ -44,6 +45,9 @@ async function uploadPhotos(
     const ext = ALLOWED_PHOTO_TYPES[file.type]
     const path = `${Date.now()}-${crypto.randomUUID()}.${ext}`
     const buffer = Buffer.from(await file.arrayBuffer())
+    if (!hasValidImageSignature(buffer, file.type)) {
+      throw new Error('Invalid image signature')
+    }
     const { data, error } = await supabase.storage
       .from(PRIJAVE_BUCKET)
       .upload(path, buffer, { contentType: file.type, upsert: false })
@@ -77,9 +81,14 @@ export async function submitPrijava(formData: FormData): Promise<SubmitResult> {
   const telefon = text(formData, 'telefon')
   const grad = text(formData, 'grad')
   const poruka = text(formData, 'poruka')
+  const suglasnost = formData.get('suglasnost')
 
   if ((vrsta !== 'trebam' && vrsta !== 'zelim') || !ime || !email || !telefon || !grad || !poruka) {
     return { success: false, error: 'Sva obavezna polja moraju biti popunjena.' }
+  }
+
+  if (suglasnost !== 'on') {
+    return { success: false, error: 'Za slanje prijave potrebno je prihvatiti pravila korištenja i privatnosti.' }
   }
 
   if (!EMAIL_RE.test(email)) {
@@ -98,6 +107,10 @@ export async function submitPrijava(formData: FormData): Promise<SubmitResult> {
 
   const rawFiles = formData.getAll('fotografije')
   const photoFiles = rawFiles.filter((f): f is File => f instanceof File && f.size > 0)
+
+  if (vrsta === 'trebam' && photoFiles.length === 0) {
+    return { success: false, error: 'Molimo priložite fotografije kupaonice.' }
+  }
 
   if (photoFiles.length > MAX_PHOTOS) {
     return { success: false, error: `Možete priložiti najviše ${MAX_PHOTOS} fotografija.` }

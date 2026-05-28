@@ -1,7 +1,9 @@
 import { ProjectForm } from '@/components/admin/ProjectForm'
 import { AdminHeader } from '@/components/admin/AdminHeader'
+import { requireAdmin } from '@/lib/admin-auth'
 
 export default async function NewProjectPage() {
+  await requireAdmin()
 
   return (
     <div className="min-h-screen bg-[#f5f4f1]">

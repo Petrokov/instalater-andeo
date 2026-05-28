@@ -2,6 +2,7 @@ import { createServerClient } from '@/lib/supabase-server'
 import { PrijaveTable } from './PrijaveTable'
 import { AdminHeader } from '@/components/admin/AdminHeader'
 import type { PrijavaStatus } from '@/lib/database.types'
+import { requireAdmin } from '@/lib/admin-auth'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,6 +14,8 @@ const statusCounts = (data: { status: PrijavaStatus }[]) => ({
 })
 
 export default async function AdminPage() {
+  await requireAdmin()
+
   const supabase = createServerClient()
   if (!supabase) throw new Error('Supabase not configured')
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@/lib/supabase-server'
 import { requireAdmin } from '@/lib/admin-auth'
 import { checkRateLimit } from '@/lib/rate-limit'
+import { hasValidImageSignature } from '@/lib/image-validation'
 
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024
 const ALLOWED_IMAGE_TYPES: Record<string, string> = {
@@ -60,6 +61,10 @@ export async function POST(request: NextRequest) {
   const filename = `projects/${folder}/${Date.now()}-${crypto.randomUUID()}.${ext}`
 
   const buffer = Buffer.from(await file.arrayBuffer())
+  if (!hasValidImageSignature(buffer, file.type)) {
+    return NextResponse.json({ error: 'Invalid image file' }, { status: 400 })
+  }
+
   const supabase = createServerClient()
   if (!supabase) return NextResponse.json({ error: 'Supabase not configured' }, { status: 500 })
 

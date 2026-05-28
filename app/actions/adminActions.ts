@@ -13,6 +13,8 @@ import {
 import { checkRateLimit } from '@/lib/rate-limit'
 import type { PrijavaStatus } from '@/lib/database.types'
 
+const PRIJAVA_STATUSES: PrijavaStatus[] = ['nova', 'u-obradi', 'zavrsena', 'odbijena']
+
 export async function adminLogin(formData: FormData) {
   const headersList = await headers()
   const ip = headersList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? headersList.get('x-real-ip') ?? 'unknown'
@@ -41,6 +43,10 @@ export async function adminLogout() {
 
 export async function updatePrijavaStatus(id: string, status: PrijavaStatus) {
   await requireAdmin()
+  if (!PRIJAVA_STATUSES.includes(status)) {
+    throw new Error('Invalid status')
+  }
+
   const supabase = createServerClient()
   if (!supabase) throw new Error('Supabase not configured')
   const { error } = await supabase.from('prijave').update({ status }).eq('id', id)

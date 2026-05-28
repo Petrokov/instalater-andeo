@@ -35,12 +35,21 @@ export async function deleteProject(id: string, slug: string) {
   const supabase = createServerClient()
   if (!supabase) throw new Error('Supabase not configured')
 
+  const { data: project, error: fetchError } = await supabase
+    .from('projects')
+    .select('slug')
+    .eq('id', id)
+    .single()
+  if (fetchError || !project) throw new Error(fetchError?.message ?? 'Project not found')
+
+  const projectSlug = project.slug || slug
+
   // Delete storage files
   const { data: files } = await supabase.storage
     .from('project-images')
-    .list(`projects/${slug}`)
+    .list(`projects/${projectSlug}`)
   if (files?.length) {
-    const paths = files.map((f) => `projects/${slug}/${f.name}`)
+    const paths = files.map((f) => `projects/${projectSlug}/${f.name}`)
     await supabase.storage.from('project-images').remove(paths)
   }
 

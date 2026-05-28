@@ -25,6 +25,10 @@ function escapeAttr(value: string) {
   return escapeHtml(value).replaceAll('`', '&#96;')
 }
 
+function subjectText(value: string) {
+  return value.replace(/[\u0000-\u001f\u007f]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120)
+}
+
 export async function sendPrijavaNotification(data: PrijavaEmailData) {
   const label = data.vrsta === 'trebam' ? 'Trebam pomoć' : 'Želim pomoći'
   const safeIme = escapeHtml(data.ime)
@@ -77,7 +81,7 @@ export async function sendPrijavaNotification(data: PrijavaEmailData) {
   await resend.emails.send({
     from: 'Instalater Anđeo <noreply@instalaterandeo.hr>',
     to: 'tin.lojen@petrokov.hr',
-    subject: `Nova prijava: ${label} - ${data.ime} (${data.grad})`,
+    subject: `Nova prijava: ${label} - ${subjectText(data.ime)} (${subjectText(data.grad)})`,
     html,
   })
 }

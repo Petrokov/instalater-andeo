@@ -3,11 +3,14 @@ import Image from 'next/image'
 import { getProjects } from '@/lib/projects'
 import { DeleteProjectButton } from './DeleteProjectButton'
 import { AdminHeader } from '@/components/admin/AdminHeader'
+import { requireAdmin } from '@/lib/admin-auth'
 
 export const revalidate = 0
 export const dynamic = 'force-dynamic'
 
 export default async function AdminProjektiPage() {
+  await requireAdmin()
+
   const projects = await getProjects()
 
   return (
