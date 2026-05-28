@@ -8,8 +8,12 @@ import type { ProjectParticipant, ProjectPartner } from '@/lib/database.types'
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
-  const projects = await getProjects()
-  return projects.map((p) => ({ slug: p.slug }))
+  try {
+    const projects = await getProjects()
+    return projects.map((p) => ({ slug: p.slug }))
+  } catch {
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
