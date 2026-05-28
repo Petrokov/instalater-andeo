@@ -14,6 +14,7 @@ const statusCounts = (data: { status: PrijavaStatus }[]) => ({
 
 export default async function AdminPage() {
   const supabase = createServerClient()
+  if (!supabase) throw new Error('Supabase not configured')
 
   const { data: prijave, error } = await supabase
     .from('prijave')

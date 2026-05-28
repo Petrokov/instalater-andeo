@@ -61,6 +61,7 @@ export async function POST(request: NextRequest) {
 
   const buffer = Buffer.from(await file.arrayBuffer())
   const supabase = createServerClient()
+  if (!supabase) return NextResponse.json({ error: 'Supabase not configured' }, { status: 500 })
 
   const { data, error } = await supabase.storage
     .from('project-images')

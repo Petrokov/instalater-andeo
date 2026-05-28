@@ -28,7 +28,7 @@ function text(formData: FormData, key: string) {
 
 async function uploadPhotos(
   files: File[],
-  supabase: ReturnType<typeof createServerClient>,
+  supabase: NonNullable<ReturnType<typeof createServerClient>>,
 ): Promise<{ paths: string[]; signedUrls: string[] }> {
   const { data: buckets } = await supabase.storage.listBuckets()
   const bucket = buckets?.find((b) => b.name === PRIJAVE_BUCKET)
@@ -113,6 +113,7 @@ export async function submitPrijava(formData: FormData): Promise<SubmitResult> {
   }
 
   const supabase = createServerClient()
+  if (!supabase) return { success: false, error: 'Servis trenutno nije dostupan.' }
 
   let fotografije: string[] | null = null
   let signedPhotoUrls: string[] | undefined
