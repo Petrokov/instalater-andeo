@@ -61,7 +61,7 @@ export function MisijaVizija() {
             <div className="border-t border-white/10 pt-8">
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { num: '4', label: 'Grada u kojima djelujemo' },
+                  { num: '6+', label: 'Gradova u kojima djelujemo' },
                   { num: '21', label: 'Planirani gradovi do 2026.' },
                 ].map((s) => (
                   <div key={s.label}>

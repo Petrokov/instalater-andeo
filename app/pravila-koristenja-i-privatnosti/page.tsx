@@ -6,8 +6,6 @@ const sections = [
     items: [
       'Naziv: Petrokov d.o.o.',
       'Sjedište: Mrkšina ulica 52D, 10000 Zagreb',
-      'E-mail: petrokov@petrokov.hr',
-      'Telefonski kontakt: +385 1 6473 111',
       'Predstavnik u EU: nije primjenjivo',
     ],
   },
@@ -61,7 +59,7 @@ const sections = [
       'uputiti prigovor na obradu,',
       'zatražiti prijenos podataka drugom voditelju obrade.',
     ],
-    after: 'Za ostvarenje svojih prava možete nas kontaktirati putem e-maila: petrokov@petrokov.hr',
+    after: 'Za ostvarenje svojih prava možete nas kontaktirati putem obrasca na web stranici.',
   },
   {
     title: '10. Povlačenje privole',

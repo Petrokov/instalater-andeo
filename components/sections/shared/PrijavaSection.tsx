@@ -27,6 +27,7 @@ export function PrijavaSection({ contactHref = '#kontakt-trebam' }: PrijavaSecti
             <Button variant="section" href={contactHref} aria-label="Prijavi kandidata - idi na kontakt formu">
               Prijavi kandidata
             </Button>
+
           </div>
         </RevealOnScroll>
 

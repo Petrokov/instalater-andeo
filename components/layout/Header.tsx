@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { BrandLogoMark } from '@/components/ui/BrandLogoMark'
 
 const navLinks = [
@@ -13,6 +14,8 @@ const navLinks = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const lightHero = ['/projekti'].includes(pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -28,7 +31,9 @@ export function Header() {
         className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-[72px] px-[5%] transition-all duration-400 ${
           scrolled
             ? 'bg-white/92 backdrop-blur-[20px] shadow-[0_2px_24px_rgba(0,0,0,0.08)]'
-            : ''
+            : lightHero
+              ? 'bg-[#faf8f4]/90 backdrop-blur-[12px]'
+              : ''
         }`}
       >
         <Link
@@ -45,7 +50,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={`text-[14px] font-medium tracking-[0.02em] no-underline transition-colors duration-200 ${
-                scrolled
+                scrolled || lightHero
                   ? 'text-secondary hover:text-dark'
                   : 'text-white/85 hover:text-yellow'
               }`}
@@ -54,7 +59,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="#kontakt"
+            href="/#kontakt"
             className="bg-yellow text-dark font-bold text-[14px] px-[22px] py-[10px] rounded-[12px] no-underline transition-all duration-200 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(244,230,0,0.4)]"
             aria-label="Javi se - kontaktni obrazac"
           >
@@ -70,17 +75,17 @@ export function Header() {
         >
           <span
             className={`block w-6 h-0.5 rounded-sm transition-all duration-300 ${
-              scrolled ? 'bg-dark' : 'bg-white'
+              scrolled || lightHero ? 'bg-dark' : 'bg-white'
             } ${menuOpen ? 'translate-y-[7px] rotate-45' : ''}`}
           />
           <span
             className={`block w-6 h-0.5 rounded-sm transition-all duration-300 ${
-              scrolled ? 'bg-dark' : 'bg-white'
+              scrolled || lightHero ? 'bg-dark' : 'bg-white'
             } ${menuOpen ? 'opacity-0' : ''}`}
           />
           <span
             className={`block w-6 h-0.5 rounded-sm transition-all duration-300 ${
-              scrolled ? 'bg-dark' : 'bg-white'
+              scrolled || lightHero ? 'bg-dark' : 'bg-white'
             } ${menuOpen ? '-translate-y-[7px] -rotate-45' : ''}`}
           />
         </button>
@@ -104,7 +109,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="#kontakt"
+            href="/#kontakt"
             onClick={closeMenu}
             className="mt-4 text-center py-[14px] rounded-[12px] bg-yellow text-dark font-bold no-underline"
           >

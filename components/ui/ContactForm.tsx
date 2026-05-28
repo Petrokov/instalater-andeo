@@ -5,12 +5,18 @@ import { submitPrijava } from '@/app/actions/submitPrijava'
 
 type Tab = 'trebam' | 'zelim'
 
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif']
+const MAX_PHOTOS = 5
+
 export function ContactForm() {
   const [tab, setTab] = useState<Tab>('trebam')
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [pending, startTransition] = useTransition()
+  const [photos, setPhotos] = useState<File[]>([])
+  const [isDragging, setIsDragging] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     function syncTabFromHash() {
@@ -40,16 +46,58 @@ export function ContactForm() {
     return () => window.removeEventListener('hashchange', syncTabFromHash)
   }, [])
 
+  function addFiles(list: FileList | File[]) {
+    const incoming = Array.from(list).filter((f) => ALLOWED_TYPES.includes(f.type))
+    setPhotos((prev) => [...prev, ...incoming].slice(0, MAX_PHOTOS))
+  }
+
+  function removePhoto(index: number) {
+    setPhotos((prev) => prev.filter((_, i) => i !== index))
+  }
+
+  function handleDragOver(e: React.DragEvent) {
+    e.preventDefault()
+    setIsDragging(true)
+  }
+
+  function handleDragLeave(e: React.DragEvent) {
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setIsDragging(false)
+    }
+  }
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault()
+    setIsDragging(false)
+    addFiles(e.dataTransfer.files)
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (e.target.files) addFiles(e.target.files)
+    e.target.value = ''
+  }
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setError(null)
+
+    if (tab === 'trebam' && photos.length === 0) {
+      setError('Molimo priložite fotografije kupaonice.')
+      return
+    }
+
     const formData = new FormData(e.currentTarget)
     formData.set('vrsta', tab)
+    formData.delete('fotografije')
+    for (const photo of photos) {
+      formData.append('fotografije', photo)
+    }
 
     startTransition(async () => {
       const result = await submitPrijava(formData)
       if (result.success) {
         setSubmitted(true)
+        setPhotos([])
         formRef.current?.reset()
         setTimeout(() => setSubmitted(false), 5000)
       } else {
@@ -119,6 +167,7 @@ export function ContactForm() {
               id={`tel-${tab}`}
               name="telefon"
               placeholder="+385 91 234 5678"
+              required
               className={inputCls}
             />
           </Field>
@@ -151,39 +200,99 @@ export function ContactForm() {
             </Field>
           </div>
 
-          {/* Photo upload - only for "trebam" tab */}
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+
           {tab === 'trebam' && (
-            <div className="sm:col-span-2">
-              <label className="block text-[13px] font-semibold text-secondary tracking-[0.03em] mb-1.5">
-                Fotografije kupaonice
-              </label>
-              <label
-                htmlFor="foto-trebam"
-                className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-[#ddd] rounded-[12px] p-6 text-center cursor-pointer transition-colors duration-200 hover:border-yellow-warm"
+            <div className="sm:col-span-2 flex flex-col gap-1.5">
+              <span className="text-[13px] font-semibold text-secondary tracking-[0.03em]">
+                Fotografije kupaonice{' '}
+                <span className="text-red-500" aria-hidden="true">*</span>
+              </span>
+
+              {/* Drop zone */}
+              <div
+                role="button"
+                tabIndex={0}
+                aria-label="Zona za povlačenje i ispuštanje fotografija"
+                onClick={() => fileInputRef.current?.click()}
+                onKeyDown={(e) => e.key === 'Enter' && fileInputRef.current?.click()}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                className={`border-2 border-dashed rounded-[14px] px-6 py-9 text-center cursor-pointer select-none outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-yellow-warm ${
+                  isDragging
+                    ? 'border-yellow-warm bg-yellow/[0.07]'
+                    : 'border-[#dedede] bg-[#f9f9f7] hover:border-yellow-warm hover:bg-yellow/[0.04]'
+                }`}
               >
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M5 22v4a1 1 0 001 1h20a1 1 0 001-1v-4" stroke="#888" strokeWidth="1.5" strokeLinecap="round" />
-                  <path d="M16 5v16M10 11l6-6 6 6" stroke="#888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <span className="text-[14px] font-semibold text-[#444]">
-                  Klikni za upload fotografija
-                </span>
-                <span className="text-[13px] text-secondary">
-                  JPG, PNG, HEIC - Max 10MB po fotografiji
-                </span>
-                <input
-                  type="file"
-                  id="foto-trebam"
-                  name="fotografije"
-                  multiple
-                  accept="image/*"
-                  className="sr-only"
-                  aria-label="Upload fotografija kupaonice"
-                />
-              </label>
-              <p className="mt-2 text-[12px] text-secondary bg-[#fefae5] rounded-[10px] px-4 py-3 border-l-[3px] border-yellow">
-                Molimo priložite minimalno 3 fotografije kupaonice ako prijavljujete potrebu za obnovom.
-              </p>
+                <div className="flex justify-center mb-4 pointer-events-none" aria-hidden="true">
+                  <svg
+                    width="36"
+                    height="36"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`transition-colors duration-200 ${isDragging ? 'text-yellow-warm' : 'text-[#c0bdb5]'}`}
+                  >
+                    <rect x="2" y="7" width="20" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.6" />
+                    <path d="M8 7V5.5A1.5 1.5 0 019.5 4h5A1.5 1.5 0 0116 5.5V7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                    <circle cx="12" cy="14" r="3.2" stroke="currentColor" strokeWidth="1.6" />
+                    <circle cx="18.5" cy="10.5" r="0.8" fill="currentColor" />
+                  </svg>
+                </div>
+                <p className="text-[15px] font-semibold text-dark pointer-events-none">
+                  Povuci fotografije ovdje
+                </p>
+                <p className="text-[13px] text-secondary mt-1 pointer-events-none">
+                  ili{' '}
+                  <span className="font-semibold text-dark underline underline-offset-[3px] decoration-yellow-warm decoration-2">
+                    odaberi s uređaja
+                  </span>
+                </p>
+                <p className="text-[11px] text-secondary/60 mt-3 pointer-events-none">
+                  Do {MAX_PHOTOS} fotografija · JPG, PNG, WebP, AVIF · max 10 MB
+                </p>
+              </div>
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                name="fotografije"
+                multiple
+                accept="image/jpeg,image/png,image/webp,image/avif"
+                className="hidden"
+                onChange={handleFileChange}
+                aria-hidden="true"
+                tabIndex={-1}
+              />
+
+              {/* Selected files */}
+              {photos.length > 0 && (
+                <ul className="flex flex-wrap gap-2 mt-1" aria-label="Odabrane fotografije">
+                  {photos.map((f, i) => (
+                    <li
+                      key={`${f.name}-${i}`}
+                      className="flex items-center gap-1.5 bg-section-bg border border-[#e8e8e8] rounded-[8px] px-3 py-1.5"
+                    >
+                      <span className="text-[12px] text-dark max-w-[160px] truncate">{f.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => removePhoto(i)}
+                        className="text-[16px] text-secondary hover:text-dark transition-colors leading-none shrink-0"
+                        aria-label={`Ukloni ${f.name}`}
+                      >
+                        ×
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {photos.length > 0 && (
+                <p className="text-[11px] text-secondary/70">
+                  {photos.length} / {MAX_PHOTOS} fotografija odabrano
+                </p>
+              )}
             </div>
           )}
 
@@ -192,6 +301,7 @@ export function ContactForm() {
             <label className="flex items-start gap-[10px] cursor-pointer">
               <input
                 type="checkbox"
+                name="suglasnost"
                 required
                 className="w-[18px] h-[18px] mt-0.5 shrink-0 accent-dark"
                 aria-required="true"
@@ -214,7 +324,7 @@ export function ContactForm() {
 
           {/* Error */}
           {error && (
-            <div className="sm:col-span-2 text-[13px] text-red-600 bg-red-50 rounded-[10px] px-4 py-3">
+            <div className="sm:col-span-2 text-[13px] text-red-600 bg-red-50 rounded-[10px] px-4 py-3" role="alert">
               {error}
             </div>
           )}
@@ -233,7 +343,7 @@ export function ContactForm() {
               }`}
               aria-label="Pošalji prijavu"
             >
-              {submitted ? 'Hvala! Prijava je poslana Poslano' : pending ? 'Šaljem...' : 'Pošalji prijavu'}
+              {submitted ? 'Hvala! Prijava je poslana' : pending ? 'Šaljem...' : 'Pošalji prijavu'}
             </button>
           </div>
         </div>

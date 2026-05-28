@@ -6,7 +6,6 @@ const navCol = [
   { href: '#kako-pomoci', label: 'Kako pomoći' },
   { href: '#galerija', label: 'Galerija' },
   { href: '#partneri', label: 'Partneri' },
-  { href: '#kontakt', label: 'Kontakt' },
 ]
 
 const projektCol = [
@@ -20,7 +19,7 @@ export function Footer() {
   return (
     <footer className="bg-footer-bg text-white/60 pt-[clamp(56px,7vw,96px)] pb-10 px-[5%]">
       <div className="max-w-[1100px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 lg:gap-12 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] gap-8 lg:gap-12 mb-14">
           {/* Brand */}
           <div>
             <Link
@@ -30,7 +29,7 @@ export function Footer() {
             >
               <BrandLogoMark className="h-10 w-auto" />
             </Link>
-            <p className="text-[14px] leading-relaxed text-white/45 max-w-[280px]">
+            <p className="text-[14px] leading-relaxed text-white/45 max-w-full md:max-w-[280px]">
               Humanitarni projekt obnove kupaonica za obitelji i pojedince kojima je pomoć
               najpotrebnija. Pokrenut s ljubavlju prema zajednici.
             </p>
@@ -109,27 +108,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Kontakt */}
-          <div>
-            <h4 className="text-[13px] font-bold text-white tracking-[0.1em] uppercase mb-4">
-              Kontakt
-            </h4>
-            <address className="not-italic flex flex-col gap-[10px]">
-              <span className="text-[14px]">Zagreb, Hrvatska</span>
-              <a
-                href="mailto:andeo@petrokov.hr"
-                className="text-[14px] text-white/50 no-underline transition-colors duration-200 hover:text-white"
-              >
-                andeo@petrokov.hr
-              </a>
-              <a
-                href="tel:+38514000000"
-                className="text-[14px] text-white/50 no-underline transition-colors duration-200 hover:text-white"
-              >
-                +385 1 4000 000
-              </a>
-            </address>
-          </div>
         </div>
 
         <div className="border-t border-white/7 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">

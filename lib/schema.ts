@@ -16,13 +16,6 @@ export const organizationSchema = {
     'https://www.facebook.com/Petrokov.hr',
     'https://www.instagram.com/petrokov_hrvatska/',
   ],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: '+385-1-6473-111',
-    email: 'andeo@petrokov.hr',
-    contactType: 'customer support',
-    availableLanguage: { '@type': 'Language', name: 'Croatian' },
-  },
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Mrkšina ulica 52D',

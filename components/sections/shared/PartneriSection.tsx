@@ -55,7 +55,7 @@ export function PartneriSection() {
       <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-8">
 
         {/* Text */}
-        <div className="w-full md:w-[400px] shrink-0 text-center md:text-left">
+        <div className="w-full md:w-[400px] md:shrink-0 text-center md:text-left">
           <SectionLabel>Naši partneri</SectionLabel>
           <h2
             id="partneri-title"
@@ -69,8 +69,8 @@ export function PartneriSection() {
         </div>
 
         {/* Orbit - full circle on mobile, centered on desktop */}
-        <div className="flex-1 flex items-center justify-center" aria-hidden="true">
-          <div className="orbit-scene relative w-[500px] h-[500px] flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center w-full overflow-hidden" aria-hidden="true">
+          <div className="orbit-scene relative w-[500px] h-[500px] flex items-center justify-center shrink-0">
 
             {/* Center: Petrokov logo */}
             <div className="relative w-[72px] h-[72px] rounded-[16px] overflow-hidden z-10 shadow-[0_8px_24px_rgba(0,0,0,0.14)]">

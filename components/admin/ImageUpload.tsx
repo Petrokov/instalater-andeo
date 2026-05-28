@@ -24,8 +24,11 @@ export function ImageUpload({ value, onChange, folder, label = 'Upload slike' }:
       formData.append('folder', folder)
       const res = await fetch('/api/upload', { method: 'POST', body: formData })
       const data = await res.json()
-      if (data.url) onChange(data.url)
-      else setError(data.error ?? 'Upload failed')
+      if (!res.ok || !data.url) {
+        setError(data.error ?? 'Upload failed')
+        return
+      }
+      onChange(data.url)
     } catch {
       setError('Upload failed')
     } finally {
@@ -86,11 +89,14 @@ export function MultiImageUpload({ value, onChange, folder }: MultiImageUploadPr
         formData.append('folder', folder)
         const res = await fetch('/api/upload', { method: 'POST', body: formData })
         const data = await res.json()
-        if (data.url) uploaded.push(data.url)
+        if (!res.ok || !data.url) {
+          throw new Error(data.error ?? `Upload failed: ${file.name}`)
+        }
+        uploaded.push(data.url)
       }
       onChange([...value, ...uploaded])
-    } catch {
-      setError('Upload failed')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Upload failed')
     } finally {
       setUploading(false)
     }
@@ -103,7 +109,7 @@ export function MultiImageUpload({ value, onChange, folder }: MultiImageUploadPr
   return (
     <div className="flex flex-col gap-3">
       {value.length > 0 && (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {value.map((url, i) => (
             <div key={i} className="relative aspect-square rounded-[10px] overflow-hidden bg-[#f0efe8]">
               {/* eslint-disable-next-line @next/next/no-img-element */}

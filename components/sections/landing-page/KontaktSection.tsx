@@ -1,10 +1,11 @@
+import Image from 'next/image'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { ContactForm } from '@/components/ui/ContactForm'
 
 const trustItems = [
   'Diskretno i povjerljivo',
-  'Odgovaramo u roku 48 sati',
+  'Prijave pregledava naš tim',
   'Svaka prijava se uzima ozbiljno',
 ]
 
@@ -17,7 +18,7 @@ export function KontaktSection() {
     >
       <span id="kontakt-trebam" className="block scroll-mt-[88px]" aria-hidden="true" />
       <span id="kontakt-zelim" className="block scroll-mt-[88px]" aria-hidden="true" />
-      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[380px_1fr] gap-12 md:gap-16 items-start">
+      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[clamp(280px,32%,380px)_1fr] gap-12 md:gap-16 items-start">
 
         {/* Left: context - sticks while form scrolls */}
         <RevealOnScroll>
@@ -42,6 +43,16 @@ export function KontaktSection() {
                 </li>
               ))}
             </ul>
+            <div className="mt-8">
+              <Image
+                src="/uploads/instalater-andjeo.png"
+                alt="Instalater Anđeo maskota"
+                width={160}
+                height={180}
+                className="object-contain"
+                style={{ height: 'auto' }}
+              />
+            </div>
           </div>
         </RevealOnScroll>
 

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = await getProjectBySlug(slug)
   if (!project) return {}
   return {
-    title: `${project.title} - Instalater Anđeo`,
+    title: project.title,
     description: project.short_description,
     alternates: {
       canonical: `https://instalaterandeo.hr/projekti/${slug}`,
@@ -32,6 +32,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : [{ url: '/hero-bg.png', width: 1200, height: 630, alt: project.title }],
       publishedTime: project.project_date ?? undefined,
       authors: ['Petrokov d.o.o.'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description: project.short_description,
+      images: [project.cover_image ?? '/hero-bg.png'],
     },
   }
 }
@@ -79,7 +85,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   }
 
   return (
-    <main>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -277,6 +283,6 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         </div>
       </section>
-    </main>
+    </div>
   )
 }

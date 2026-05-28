@@ -3,7 +3,7 @@ import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 const stats = [
   { num: '5+',  label: 'Obnova' },
   { num: '20+', label: 'Partnera i donatora' },
-  { num: '4',   label: 'Grada' },
+  { num: '6+',  label: 'Gradova' },
   { num: '1',   label: 'Zajednički cilj' },
 ]
 
@@ -14,7 +14,7 @@ export function ImpactSection() {
       className="py-[clamp(64px,8vw,100px)] px-[5%] bg-[#f5f0e8]"
       aria-labelledby="impact-title"
     >
-      <div className="max-w-[1100px] mx-auto">
+      <div className="max-w-[1100px] mx-auto text-center">
         <RevealOnScroll>
           <h2
             id="impact-title"

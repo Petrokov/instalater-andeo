@@ -1,10 +1,12 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { requireAdmin } from '@/lib/admin-auth'
 import { createServerClient } from '@/lib/supabase-server'
 import type { ProjectInsert, ProjectUpdate } from '@/lib/database.types'
 
 export async function createProject(data: ProjectInsert) {
+  await requireAdmin()
   const supabase = createServerClient()
   const { data: project, error } = await supabase
     .from('projects')
@@ -18,6 +20,7 @@ export async function createProject(data: ProjectInsert) {
 }
 
 export async function updateProject(id: string, data: ProjectUpdate) {
+  await requireAdmin()
   const supabase = createServerClient()
   const { error } = await supabase.from('projects').update(data).eq('id', id)
   if (error) throw new Error(error.message)
@@ -26,6 +29,7 @@ export async function updateProject(id: string, data: ProjectUpdate) {
 }
 
 export async function deleteProject(id: string, slug: string) {
+  await requireAdmin()
   const supabase = createServerClient()
 
   // Delete storage files
@@ -44,6 +48,7 @@ export async function deleteProject(id: string, slug: string) {
 }
 
 export async function ensureStorageBucket() {
+  await requireAdmin()
   const supabase = createServerClient()
   const { data: buckets } = await supabase.storage.listBuckets()
   const exists = buckets?.some((b) => b.name === 'project-images')

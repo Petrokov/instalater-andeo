@@ -138,7 +138,7 @@ export function KakoDjelujeSection() {
               Trenutno djelujemo u
             </p>
             <div className="flex flex-wrap gap-3">
-              {['Zagreb', 'Osijek', 'Split', 'Đakovo'].map((city) => (
+              {['Zagreb', 'Osijek', 'Split', 'Đakovo', '+ više gradova'].map((city) => (
                 <span
                   key={city}
                   className="text-[13px] font-bold text-dark bg-white border border-[#e4e2de] rounded-full px-4 py-[6px]"

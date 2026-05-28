@@ -354,7 +354,7 @@ export function ProjectForm({ project }: Props) {
         {form.partners.length === 0 && (
           <p className="text-[13px] text-secondary">Nema partnera. Klikni &quot;Dodaj partnera&quot; za dodavanje.</p>
         )}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {form.partners.map((p, i) => (
             <div key={i} className="border border-[#e8e8e8] rounded-[14px] p-3 flex flex-col gap-2">
               <div className="flex items-center justify-between">

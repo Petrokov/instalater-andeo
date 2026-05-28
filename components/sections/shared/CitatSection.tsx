@@ -7,27 +7,35 @@ import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 const testimonials = [
   {
     id: 1,
-    initials: 'M',
-    name: 'Marta',
-    role: 'Umirovljenica, Zagreb',
+    initials: 'V',
+    name: 'Obitelj Vukovac',
+    role: 'Zagreb',
     content:
-      'Godinama sam se bojala ući u svoju kupaonicu. Ekipa je stigla u subotu ujutro i do nedjelje navečer imala sam potpuno novo kupalište. Nema riječi kojima bih ih mogla opisati.',
+      'Od prvog kontakta do završnih radova sve je bilo stručno, organizirano i s puno pažnje prema našim potrebama. Nova kupaonica nam je vratila mir u svakodnevicu.',
   },
   {
     id: 2,
-    initials: 'T',
-    name: 'Tomislav H.',
-    role: 'Instalater volonter',
+    initials: 'B',
+    name: 'Obitelj Barišić',
+    role: 'Osijek, Višnjevac',
     content:
-      'Svaki projekt koji završimo je više od nove kupaonice. Vidim osmijehe koji traju tjednima. To je razlog zašto se vraćam svaki put kad god mogu.',
+      'Ova pomoć nam je vratila vjeru u ljude. Hvala svim anđelima koji su nas podržali i pokazali da mala obnova može značiti veliku promjenu.',
   },
   {
     id: 3,
-    initials: 'A',
-    name: 'Ana Kovač',
-    role: 'Privatna donatorica',
+    initials: 'N',
+    name: 'Nekić instalacije j.d.o.o.',
+    role: 'Sudionik projekta',
     content:
-      'Znala sam da moja donacija neće završiti u administraciji, nego točno tamo gdje treba, u nečijoj novoj kupaonici. Ovaj projekt mi je vratio vjeru u zajednicu.',
+      'Kad majstor zna da njegov rad nekome vraća sigurnost doma, svaki sat uložen u projekt ima posebno značenje.',
+  },
+  {
+    id: 4,
+    initials: 'T',
+    name: 'Tomić instalacije',
+    role: 'Sudionik projekta',
+    content:
+      'Najveća vrijednost ovakvih akcija vidi se tek kad obitelj prvi put uđe u obnovljen prostor. Tada znaš da si bio dio nečeg stvarno dobrog.',
   },
 ]
 
@@ -35,22 +43,21 @@ const INTERVAL_MS = 6000
 const FADE_MS = 320
 
 export function CitatSection() {
-  const [active, setActive]               = useState(0)
-  const [visible, setVisible]             = useState(true)
-  const [paused, setPaused]               = useState(false)
-  const [prefersReduced, setPrefersReduced] = useState(false)
+  const [active, setActive] = useState(0)
+  const [visible, setVisible] = useState(true)
+  const [paused, setPaused] = useState(false)
+  const [prefersReduced, setPrefersReduced] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Detect and track prefers-reduced-motion
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReduced(mq.matches)
     const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches)
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
   }, [])
 
-  // Auto-advance — restarts whenever active changes so manual nav resets the timer
   useEffect(() => {
     if (prefersReduced || paused) return
     const id = setInterval(() => {
@@ -90,8 +97,6 @@ export function CitatSection() {
     >
       <RevealOnScroll>
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-
-          {/* Left: heading + dots */}
           <div>
             <SectionLabel>Glasovi projekta</SectionLabel>
             <h2 className="text-[clamp(24px,3vw,40px)] font-extrabold leading-[1.2] mb-4">
@@ -101,7 +106,6 @@ export function CitatSection() {
               Čuju ih primatelji pomoći, volonteri i donatori koji su postali dio nečijeg boljeg doma.
             </p>
 
-            {/* Nav dots */}
             <div className="flex items-center gap-3" role="tablist" aria-label="Odaberi svjedočanstvo">
               {testimonials.map((tm, idx) => (
                 <button
@@ -114,7 +118,7 @@ export function CitatSection() {
                   onClick={() => goTo(idx)}
                   onKeyDown={(e) => {
                     if (e.key === 'ArrowRight') goTo((idx + 1) % testimonials.length)
-                    if (e.key === 'ArrowLeft')  goTo((idx - 1 + testimonials.length) % testimonials.length)
+                    if (e.key === 'ArrowLeft') goTo((idx - 1 + testimonials.length) % testimonials.length)
                   }}
                   className={`rounded-full transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow ${
                     active === idx
@@ -126,14 +130,13 @@ export function CitatSection() {
             </div>
           </div>
 
-          {/* Right: testimonial */}
           <div className="relative">
             <div
               id="citat-card"
               role="tabpanel"
               aria-live="polite"
               aria-atomic="true"
-              className="bg-white border border-[#efefef] rounded-[20px] p-[clamp(24px,3vw,40px)] shadow-[0_4px_32px_rgba(0,0,0,0.06)] flex flex-col h-[360px] overflow-hidden"
+              className="bg-white border border-[#efefef] rounded-[20px] p-[clamp(24px,3vw,40px)] shadow-[0_4px_32px_rgba(0,0,0,0.06)] flex flex-col min-h-[320px] sm:h-[360px] overflow-hidden"
               style={{
                 opacity: visible ? 1 : 0,
                 transform: visible ? 'translateX(0)' : 'translateX(24px)',
@@ -168,7 +171,6 @@ export function CitatSection() {
               </div>
             </div>
           </div>
-
         </div>
       </RevealOnScroll>
     </section>

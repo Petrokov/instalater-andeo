@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { ADMIN_SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/admin-session'
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/login')) {
-    const session = request.cookies.get('admin_session')
-    if (session?.value !== process.env.ADMIN_SECRET) {
+    const session = request.cookies.get(ADMIN_SESSION_COOKIE)
+    if (!verifyAdminSessionToken(session?.value)) {
       return NextResponse.redirect(new URL('/admin/login', request.url))
     }
   }
