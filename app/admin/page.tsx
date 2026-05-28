@@ -3,6 +3,8 @@ import { PrijaveTable } from './PrijaveTable'
 import { AdminHeader } from '@/components/admin/AdminHeader'
 import type { PrijavaStatus } from '@/lib/database.types'
 
+export const dynamic = 'force-dynamic'
+
 const statusCounts = (data: { status: PrijavaStatus }[]) => ({
   nova: data.filter((p) => p.status === 'nova').length,
   'u-obradi': data.filter((p) => p.status === 'u-obradi').length,

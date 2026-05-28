@@ -5,6 +5,7 @@ import { DeleteProjectButton } from './DeleteProjectButton'
 import { AdminHeader } from '@/components/admin/AdminHeader'
 
 export const revalidate = 0
+export const dynamic = 'force-dynamic'
 
 export default async function AdminProjektiPage() {
   const projects = await getProjects()

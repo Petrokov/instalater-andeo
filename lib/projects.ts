@@ -1,7 +1,9 @@
-import { createServerClient } from './supabase-server'
+import { createServerClient, hasServerSupabaseEnv } from './supabase-server'
 import type { Project } from './database.types'
 
 export async function getProjects(): Promise<Project[]> {
+  if (!hasServerSupabaseEnv()) return []
+
   const supabase = createServerClient()
   const { data, error } = await supabase
     .from('projects')
@@ -12,6 +14,8 @@ export async function getProjects(): Promise<Project[]> {
 }
 
 export async function getFeaturedProjects(): Promise<Project[]> {
+  if (!hasServerSupabaseEnv()) return []
+
   const supabase = createServerClient()
   const { data, error } = await supabase
     .from('projects')
@@ -24,6 +28,8 @@ export async function getFeaturedProjects(): Promise<Project[]> {
 }
 
 export async function getLatestProjects(limit = 2, excludeSlug?: string): Promise<Project[]> {
+  if (!hasServerSupabaseEnv()) return []
+
   const supabase = createServerClient()
   let query = supabase
     .from('projects')
@@ -42,6 +48,8 @@ export async function getLatestProjects(limit = 2, excludeSlug?: string): Promis
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  if (!hasServerSupabaseEnv()) return null
+
   const supabase = createServerClient()
   const { data, error } = await supabase
     .from('projects')
@@ -53,6 +61,8 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 }
 
 export async function getProjectById(id: string): Promise<Project | null> {
+  if (!hasServerSupabaseEnv()) return null
+
   const supabase = createServerClient()
   const { data, error } = await supabase
     .from('projects')
