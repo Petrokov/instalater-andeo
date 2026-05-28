@@ -1,4 +1,4 @@
-import { createServerClient } from '@/lib/supabase-server'
+import { createServerClient, isValidSupabaseKey } from '@/lib/supabase-server'
 import { PrijaveTable } from './PrijaveTable'
 import { AdminHeader } from '@/components/admin/AdminHeader'
 import type { PrijavaStatus } from '@/lib/database.types'
@@ -16,6 +16,24 @@ const statusCounts = (data: { status: PrijavaStatus }[]) => ({
 export default async function AdminPage() {
   await requireAdmin()
 
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+  if (!isValidSupabaseKey(serviceRoleKey)) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="max-w-md text-center space-y-3">
+          <p className="text-red-500 font-semibold text-lg">Konfiguracija Supabase nije ispravna</p>
+          <p className="text-gray-600 text-sm">
+            Varijabla <code className="bg-gray-100 px-1 rounded">SUPABASE_SERVICE_ROLE_KEY</code> nije
+            postavljena ili nije ispravna. Provjerite da koristite{' '}
+            <strong>service_role</strong> ključ (ne <em>anon</em> ključ) iz postavki vašeg Supabase
+            projekta i da je ispravno postavljen u Railway varijablama okoline.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   const supabase = createServerClient()
   if (!supabase) throw new Error('Supabase not configured')
 
@@ -25,9 +43,26 @@ export default async function AdminPage() {
     .order('created_at', { ascending: false })
 
   if (error) {
+    const isAuthError =
+      error.message.toLowerCase().includes('invalid api key') ||
+      error.message.toLowerCase().includes('jwt') ||
+      error.message.toLowerCase().includes('unauthorized')
+
     return (
-      <div className="min-h-screen flex items-center justify-center text-red-500">
-        Greška pri dohvaćanju podataka: {error.message}
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="max-w-md text-center space-y-3">
+          <p className="text-red-500 font-semibold text-lg">Greška pri dohvaćanju podataka</p>
+          {isAuthError ? (
+            <p className="text-gray-600 text-sm">
+              Supabase je vratio grešku autentikacije ({error.message}). Provjerite da je{' '}
+              <code className="bg-gray-100 px-1 rounded">SUPABASE_SERVICE_ROLE_KEY</code> ispravno
+              postavljen u Railway varijablama okoline — koristite <strong>service_role</strong> ključ
+              iz Supabase Project Settings → API.
+            </p>
+          ) : (
+            <p className="text-gray-600 text-sm">{error.message}</p>
+          )}
+        </div>
       </div>
     )
   }
