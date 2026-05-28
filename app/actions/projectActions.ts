@@ -8,6 +8,7 @@ import type { ProjectInsert, ProjectUpdate } from '@/lib/database.types'
 export async function createProject(data: ProjectInsert) {
   await requireAdmin()
   const supabase = createServerClient()
+  if (!supabase) throw new Error('Supabase not configured')
   const { data: project, error } = await supabase
     .from('projects')
     .insert(data)
@@ -22,6 +23,7 @@ export async function createProject(data: ProjectInsert) {
 export async function updateProject(id: string, data: ProjectUpdate) {
   await requireAdmin()
   const supabase = createServerClient()
+  if (!supabase) throw new Error('Supabase not configured')
   const { error } = await supabase.from('projects').update(data).eq('id', id)
   if (error) throw new Error(error.message)
   revalidatePath('/projekti')
@@ -31,6 +33,7 @@ export async function updateProject(id: string, data: ProjectUpdate) {
 export async function deleteProject(id: string, slug: string) {
   await requireAdmin()
   const supabase = createServerClient()
+  if (!supabase) throw new Error('Supabase not configured')
 
   // Delete storage files
   const { data: files } = await supabase.storage
@@ -50,6 +53,7 @@ export async function deleteProject(id: string, slug: string) {
 export async function ensureStorageBucket() {
   await requireAdmin()
   const supabase = createServerClient()
+  if (!supabase) throw new Error('Supabase not configured')
   const { data: buckets } = await supabase.storage.listBuckets()
   const exists = buckets?.some((b) => b.name === 'project-images')
   if (!exists) {

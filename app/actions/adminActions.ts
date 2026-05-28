@@ -42,6 +42,7 @@ export async function adminLogout() {
 export async function updatePrijavaStatus(id: string, status: PrijavaStatus) {
   await requireAdmin()
   const supabase = createServerClient()
+  if (!supabase) throw new Error('Supabase not configured')
   const { error } = await supabase.from('prijave').update({ status }).eq('id', id)
   if (error) throw new Error(error.message)
 }
