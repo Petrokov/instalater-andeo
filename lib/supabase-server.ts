@@ -6,11 +6,15 @@ export function hasServerSupabaseEnv() {
 
 export function createServerClient() {
   if (!hasServerSupabaseEnv()) {
-    throw new Error('Missing Supabase server environment variables')
+    return null
   }
 
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-    process.env.SUPABASE_SERVICE_ROLE_KEY as string
-  )
+  try {
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+      process.env.SUPABASE_SERVICE_ROLE_KEY as string
+    )
+  } catch {
+    return null
+  }
 }
