@@ -41,7 +41,7 @@ export function Header() {
           className="flex items-center gap-3 no-underline"
           aria-label="Instalater Anđeo - Početna"
         >
-          <BrandLogoMark className="h-10 w-auto" />
+          <BrandLogoMark className="h-10 w-auto" logoSrc="/uploads/logo-krila/logo-header.png" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8" aria-label="Glavna navigacija">

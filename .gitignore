@@ -5,7 +5,7 @@ node_modules/
 .claude/
 .agents/
 skills-lock.json
-uploads/
+/uploads/
 *.html
 PRODUCT.md
 STYLEGUIDE.md

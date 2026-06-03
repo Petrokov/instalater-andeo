@@ -9,8 +9,8 @@ type PrijavaSectionProps = {
 
 export function PrijavaSection({ contactHref = '#kontakt-trebam' }: PrijavaSectionProps) {
   return (
-    <section id="prijava" className="py-[clamp(64px,8vw,120px)] px-[5%] bg-section-bg" aria-labelledby="prijava-title">
-      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-10 md:gap-16 items-center">
+    <section id="prijava" className="py-[clamp(64px,8vw,120px)] px-[5%] bg-section-bg overflow-x-clip" aria-labelledby="prijava-title">
+      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-10 md:gap-16 items-center min-w-0">
         <RevealOnScroll>
           <div>
             <SectionLabel>Prijavi kandidata</SectionLabel>
@@ -32,8 +32,10 @@ export function PrijavaSection({ contactHref = '#kontakt-trebam' }: PrijavaSecti
         </RevealOnScroll>
 
         <RevealOnScroll delay={150}>
-          <div className="order-first md:order-last">
-            <ImageCarousel />
+          <div className="order-first md:order-last min-w-0 w-full max-w-full overflow-hidden pt-14 -mt-8 pb-2 md:overflow-visible md:pt-0 md:mt-0 md:pb-0">
+            <div className="w-[78%] max-w-[340px] mx-auto sm:w-full sm:max-w-none">
+              <ImageCarousel />
+            </div>
           </div>
         </RevealOnScroll>
       </div>

@@ -27,7 +27,7 @@ export function Footer() {
               className="flex items-center gap-3 no-underline mb-4"
               aria-label="Instalater Anđeo - Početna"
             >
-              <BrandLogoMark className="h-10 w-auto" />
+              <BrandLogoMark className="h-10 w-auto" logoSrc="/uploads/logo-krila/logo-footer.png" />
             </Link>
             <p className="text-[14px] leading-relaxed text-white/45 max-w-full md:max-w-[280px]">
               Humanitarni projekt obnove kupaonica za obitelji i pojedince kojima je pomoć
