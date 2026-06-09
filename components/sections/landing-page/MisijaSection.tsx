@@ -58,7 +58,7 @@ export function MisijaSection() {
         {values.map((v, i) => (
           <RevealOnScroll key={v.n} delay={i * 100}>
             <div
-              className={`flex items-start gap-6 md:gap-10 py-[clamp(28px,3.5vw,44px)]${i > 0 ? ' border-t border-[#ebebeb]' : ''}`}
+              className={`flex items-start gap-6 md:gap-10 py-[clamp(28px,3.5vw,44px)]${i > 0 ? ' border-t border-[#ebebeb] pt-6' : ''}`}
             >
               <span
                 className="text-[clamp(40px,4.5vw,64px)] font-extrabold leading-[1] text-yellow tabular-nums shrink-0 w-[52px] md:w-[76px]"
@@ -67,7 +67,7 @@ export function MisijaSection() {
                 {v.n}
               </span>
               <div className="flex-1 md:grid md:grid-cols-[clamp(160px,22%,240px)_1fr] md:gap-14 md:items-baseline">
-                <h3 className="text-[clamp(18px,1.8vw,24px)] font-extrabold leading-[1.25] mb-3 md:mb-0">
+                <h3 className="text-[clamp(18px,1.8vw,24px)] font-extrabold leading-[1.25] mb-3 md:mb-0 text-left">
                   {v.title}
                 </h3>
                 <p className="text-[clamp(14px,1.1vw,17px)] leading-[1.8] text-secondary">

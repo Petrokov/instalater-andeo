@@ -40,7 +40,7 @@ export function HeroSection() {
           className="hero-glass w-full max-w-[420px] md:w-auto md:max-w-[520px] md:ml-[clamp(0px,8%,140px)] p-[clamp(20px,4vw,44px)] rounded-3xl border border-white/28 shadow-[0_24px_80px_rgba(0,0,0,0.32)] animate-[fadeInCard_1s_ease_both]"
         >
           <div className="flex items-center gap-[10px] mb-5">
-            <BrandLogoMark className="h-[34px] w-auto" />
+            <BrandLogoMark className="h-[46px] w-auto" />
           </div>
 
           <h1

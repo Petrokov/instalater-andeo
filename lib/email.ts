@@ -107,11 +107,6 @@ export async function sendPrijavaConfirmation(data: { ime: string; email: string
       <p style="margin:0;color:#1a1610;font-size:15px;line-height:1.7">
         Hvala što ste nam se obratili. Svaka prijava za nas je važna i obradit ćemo je s pažnjom.
       </p>
-      <div style="margin-top:28px;padding:16px 20px;background:#f9f8f5;border-radius:10px;border-left:3px solid #c5a059">
-        <p style="margin:0;color:#888;font-size:13px;line-height:1.6">
-          Ako imate pitanja, možete nas kontaktirati odgovorom na ovaj email ili putem web stranice.
-        </p>
-      </div>
     </div>
     <div style="padding:16px 32px;background:#f9f8f5;border-top:1px solid #ebebeb">
       <p style="margin:0;font-size:12px;color:#aaa">Instalater Anđeo &middot; instalaterandeo.hr</p>

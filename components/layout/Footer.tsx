@@ -23,7 +23,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link
-              href="#hero"
+              href="/#hero"
               className="flex items-center gap-3 no-underline mb-4"
               aria-label="Instalater Anđeo - Početna"
             >

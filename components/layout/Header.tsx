@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { BrandLogoMark } from '@/components/ui/BrandLogoMark'
 
 const navLinks = [
-  { href: '/', label: 'Naslovna' },
+  { href: '/#hero', label: 'Naslovna' },
   { href: '/projekti', label: 'Projekti' },
   { href: '/o-nama', label: 'O nama' },
 ]
@@ -37,7 +37,7 @@ export function Header() {
         }`}
       >
         <Link
-          href="/"
+          href="/#hero"
           className="flex items-center gap-3 no-underline"
           aria-label="Instalater Anđeo - Početna"
         >
