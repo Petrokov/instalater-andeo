@@ -43,7 +43,6 @@ export async function getLatestProjects(limit = 2, excludeSlug?: string): Promis
     let query = supabase
       .from('projects')
       .select('*')
-      .order('project_date', { ascending: false, nullsFirst: false })
       .order('created_at', { ascending: false })
       .limit(limit)
 
