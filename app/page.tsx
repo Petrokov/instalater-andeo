@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { HeroSection } from '@/components/sections/landing-page/HeroSection'
 
 export const metadata: Metadata = {
-  title: 'Instalater Anđeo - Humanitarna obnova kupaonica',
+  title: { absolute: 'Petrokov anđeo' },
   description:
     'Instalater Anđeo je humanitarni projekt obnove kupaonica za obitelji i pojedince kojima je pomoć najpotrebnija. Prijavi kandidata ili podrži projekt.',
   alternates: {

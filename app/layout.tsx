@@ -14,8 +14,8 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL('https://instalaterandeo.hr'),
   title: {
-    default: 'Instalater Anđeo - Humanitarna obnova kupaonica',
-    template: '%s | Instalater Anđeo',
+    default: 'Petrokov anđeo',
+    template: '%s | Petrokov anđeo',
   },
   description:
     'Instalater Anđeo je humanitarni projekt obnove kupaonica za obitelji i pojedince kojima je pomoć najpotrebnija. Prijavi kandidata ili podrži projekt.',
