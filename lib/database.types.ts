@@ -48,6 +48,12 @@ export interface Project {
 export type ProjectInsert = Omit<Project, 'id' | 'created_at' | 'updated_at'>
 export type ProjectUpdate = Partial<ProjectInsert>
 
+export interface SiteSettings {
+  id: number
+  contact_form_enabled: boolean
+  updated_at: string
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -111,6 +117,19 @@ export interface Database {
           is_featured?: boolean
           participants?: ProjectParticipant[]
           partners?: ProjectPartner[]
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: SiteSettings
+        Insert: {
+          id?: number
+          contact_form_enabled?: boolean
+          updated_at?: string
+        }
+        Update: {
+          contact_form_enabled?: boolean
+          updated_at?: string
         }
         Relationships: []
       }

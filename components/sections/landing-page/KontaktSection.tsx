@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { ContactForm } from '@/components/ui/ContactForm'
+import { getContactFormEnabled } from '@/lib/settings'
 
 const trustItems = [
   'Diskretno i povjerljivo',
@@ -9,7 +10,9 @@ const trustItems = [
   'Svaka prijava se uzima ozbiljno',
 ]
 
-export function KontaktSection() {
+export async function KontaktSection() {
+  const contactFormEnabled = await getContactFormEnabled()
+
   return (
     <section
       id="kontakt"
@@ -58,10 +61,39 @@ export function KontaktSection() {
 
         {/* Right: form */}
         <RevealOnScroll delay={120}>
-          <ContactForm />
+          {contactFormEnabled ? <ContactForm /> : <ContactFormClosedNotice />}
         </RevealOnScroll>
 
       </div>
     </section>
+  )
+}
+
+function ContactFormClosedNotice() {
+  return (
+    <div className="bg-section-bg border border-[#ebebeb] rounded-[20px] px-8 py-12 text-center">
+      <div className="flex justify-center mb-5" aria-hidden="true">
+        <span className="flex items-center justify-center w-14 h-14 rounded-full bg-yellow/15">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 7v5l3 2"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-dark"
+            />
+            <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" className="text-dark" />
+          </svg>
+        </span>
+      </div>
+
+      <h3 className="text-[20px] font-extrabold text-dark mb-3">
+        Trenutno ne primamo nove prijave
+      </h3>
+      <p className="text-[15px] leading-[1.7] text-secondary max-w-[460px] mx-auto">
+        Trenutno ne primamo prijave. Hvala na razumijevanju.
+      </p>
+    </div>
   )
 }

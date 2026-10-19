@@ -13,6 +13,7 @@ type AdminHeaderProps = {
 const navLinks = [
   { href: '/admin', label: 'Prijave' },
   { href: '/admin/projekti', label: 'Projekti' },
+  { href: '/admin/postavke', label: 'Postavke' },
 ]
 
 export function AdminHeader({ current = 'Upravljačka ploča', actions = [] }: AdminHeaderProps) {
