@@ -12,7 +12,7 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://instalaterandeo.hr'),
+  metadataBase: new URL('https://petrokov-andjeo.hr'),
   title: {
     default: 'Petrokov anđeo',
     template: '%s | Petrokov anđeo',
@@ -34,13 +34,13 @@ export const metadata: Metadata = {
   creator: 'Petrokov d.o.o.',
   publisher: 'Petrokov d.o.o.',
   alternates: {
-    canonical: 'https://instalaterandeo.hr',
-    languages: { 'hr-HR': 'https://instalaterandeo.hr' },
+    canonical: 'https://petrokov-andjeo.hr',
+    languages: { 'hr-HR': 'https://petrokov-andjeo.hr' },
   },
   openGraph: {
     type: 'website',
     locale: 'hr_HR',
-    url: 'https://instalaterandeo.hr',
+    url: 'https://petrokov-andjeo.hr',
     siteName: 'Instalater Anđeo',
     title: 'Instalater Anđeo - Humanitarna obnova kupaonica',
     description:

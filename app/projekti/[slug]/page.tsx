@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: project.title,
     description: project.short_description,
     alternates: {
-      canonical: `https://instalaterandeo.hr/projekti/${slug}`,
+      canonical: `https://petrokov-andjeo.hr/projekti/${slug}`,
     },
     openGraph: {
       type: 'article',
-      url: `https://instalaterandeo.hr/projekti/${slug}`,
+      url: `https://petrokov-andjeo.hr/projekti/${slug}`,
       title: project.title,
       description: project.short_description,
       images: project.cover_image
@@ -62,16 +62,16 @@ export default async function ProjectDetailPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Početna', item: 'https://instalaterandeo.hr' },
-      { '@type': 'ListItem', position: 2, name: 'Projekti', item: 'https://instalaterandeo.hr/projekti' },
-      { '@type': 'ListItem', position: 3, name: project.title, item: `https://instalaterandeo.hr/projekti/${slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Početna', item: 'https://petrokov-andjeo.hr' },
+      { '@type': 'ListItem', position: 2, name: 'Projekti', item: 'https://petrokov-andjeo.hr/projekti' },
+      { '@type': 'ListItem', position: 3, name: project.title, item: `https://petrokov-andjeo.hr/projekti/${slug}` },
     ],
   }
 
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    '@id': `https://instalaterandeo.hr/projekti/${slug}`,
+    '@id': `https://petrokov-andjeo.hr/projekti/${slug}`,
     headline: project.title,
     description: project.short_description,
     datePublished: project.project_date ?? new Date().toISOString().split('T')[0],
@@ -81,12 +81,12 @@ export default async function ProjectDetailPage({ params }: Props) {
       name: 'Petrokov d.o.o.',
       url: 'https://petrokov.hr',
     },
-    publisher: { '@id': 'https://instalaterandeo.hr/#organization' },
+    publisher: { '@id': 'https://petrokov-andjeo.hr/#organization' },
     image: project.cover_image
       ? { '@type': 'ImageObject', url: project.cover_image }
-      : 'https://instalaterandeo.hr/hero-bg.png',
+      : 'https://petrokov-andjeo.hr/hero-bg.png',
     inLanguage: 'hr-HR',
-    isPartOf: { '@id': 'https://instalaterandeo.hr/#website' },
+    isPartOf: { '@id': 'https://petrokov-andjeo.hr/#website' },
   }
 
   return (

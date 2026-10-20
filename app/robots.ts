@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://instalaterandeo.hr/sitemap.xml',
-    host: 'https://instalaterandeo.hr',
+    sitemap: 'https://petrokov-andjeo.hr/sitemap.xml',
+    host: 'https://petrokov-andjeo.hr',
   }
 }

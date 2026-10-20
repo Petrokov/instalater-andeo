@@ -1,17 +1,17 @@
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'NGO'],
-  '@id': 'https://instalaterandeo.hr/#organization',
+  '@id': 'https://petrokov-andjeo.hr/#organization',
   name: 'Instalater Anđeo',
   alternateName: 'Petrokov Anđeo',
   description:
     'Humanitarni projekt obnove kupaonica za obitelji i pojedince kojima je pomoć najpotrebnija. Petrokov d.o.o. organizira volontere, instalatere i partnere za besplatnu obnovu kupaonica diljem Hrvatske.',
-  url: 'https://instalaterandeo.hr',
+  url: 'https://petrokov-andjeo.hr',
   logo: {
     '@type': 'ImageObject',
-    url: 'https://instalaterandeo.hr/logo.png',
+    url: 'https://petrokov-andjeo.hr/logo.png',
   },
-  image: 'https://instalaterandeo.hr/hero-bg.png',
+  image: 'https://petrokov-andjeo.hr/hero-bg.png',
   sameAs: [
     'https://www.facebook.com/Petrokov.hr',
     'https://www.instagram.com/petrokov_hrvatska/',
@@ -117,9 +117,9 @@ export const faqSchema = {
 export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': 'https://instalaterandeo.hr/#website',
+  '@id': 'https://petrokov-andjeo.hr/#website',
   name: 'Instalater Anđeo',
-  url: 'https://instalaterandeo.hr',
+  url: 'https://petrokov-andjeo.hr',
   inLanguage: 'hr-HR',
-  publisher: { '@id': 'https://instalaterandeo.hr/#organization' },
+  publisher: { '@id': 'https://petrokov-andjeo.hr/#organization' },
 }

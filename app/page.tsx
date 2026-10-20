@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   description:
     'Instalater Anđeo je humanitarni projekt obnove kupaonica za obitelji i pojedince kojima je pomoć najpotrebnija. Prijavi kandidata ili podrži projekt.',
   alternates: {
-    canonical: 'https://instalaterandeo.hr',
-    languages: { 'hr-HR': 'https://instalaterandeo.hr' },
+    canonical: 'https://petrokov-andjeo.hr',
+    languages: { 'hr-HR': 'https://petrokov-andjeo.hr' },
   },
   openGraph: {
     type: 'website',
-    url: 'https://instalaterandeo.hr',
+    url: 'https://petrokov-andjeo.hr',
     title: 'Instalater Anđeo - Humanitarna obnova kupaonica',
     description:
       'Humanitarni projekt obnove kupaonica za obitelji i pojedince kojima je pomoć najpotrebnija. Podrži projekt ili prijavi kandidata.',

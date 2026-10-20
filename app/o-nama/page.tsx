@@ -26,13 +26,13 @@ export const metadata: Metadata = {
     'zagreb osijek split đakovo',
   ],
   alternates: {
-    canonical: 'https://instalaterandeo.hr/o-nama',
-    languages: { 'hr-HR': 'https://instalaterandeo.hr/o-nama' },
+    canonical: 'https://petrokov-andjeo.hr/o-nama',
+    languages: { 'hr-HR': 'https://petrokov-andjeo.hr/o-nama' },
   },
   openGraph: {
     type: 'website',
     locale: 'hr_HR',
-    url: 'https://instalaterandeo.hr/o-nama',
+    url: 'https://petrokov-andjeo.hr/o-nama',
     siteName: 'Instalater Anđeo',
     title: 'O nama - Instalater Anđeo | Petrokov',
     description:
@@ -70,13 +70,13 @@ const breadcrumbSchema = {
       '@type': 'ListItem',
       position: 1,
       name: 'Početna',
-      item: 'https://instalaterandeo.hr',
+      item: 'https://petrokov-andjeo.hr',
     },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'O nama',
-      item: 'https://instalaterandeo.hr/o-nama',
+      item: 'https://petrokov-andjeo.hr/o-nama',
     },
   ],
 }
@@ -84,14 +84,14 @@ const breadcrumbSchema = {
 const aboutPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  '@id': 'https://instalaterandeo.hr/o-nama',
-  url: 'https://instalaterandeo.hr/o-nama',
+  '@id': 'https://petrokov-andjeo.hr/o-nama',
+  url: 'https://petrokov-andjeo.hr/o-nama',
   name: 'O nama - Instalater Anđeo',
   description:
     'Stranica o projektu Instalater Anđeo: misija, vizija, kako djelujemo i tko stoji iza projekta.',
   inLanguage: 'hr-HR',
-  isPartOf: { '@id': 'https://instalaterandeo.hr/#website' },
-  about: { '@id': 'https://instalaterandeo.hr/#organization' },
+  isPartOf: { '@id': 'https://petrokov-andjeo.hr/#website' },
+  about: { '@id': 'https://petrokov-andjeo.hr/#organization' },
   breadcrumb: breadcrumbSchema,
 }
 

@@ -7,13 +7,13 @@ import { ImageCarousel } from '@/components/ui/ImageCarousel'
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: 'https://instalaterandeo.hr/projekti',
-    languages: { 'hr-HR': 'https://instalaterandeo.hr/projekti' },
+    canonical: 'https://petrokov-andjeo.hr/projekti',
+    languages: { 'hr-HR': 'https://petrokov-andjeo.hr/projekti' },
   },
   title: 'Projekti',
   description: 'Pogledajte odrađene projekte obnove kupaonica. Svaki projekt dokaz je da solidarnost mijenja živote.',
   openGraph: {
-    url: 'https://instalaterandeo.hr/projekti',
+    url: 'https://petrokov-andjeo.hr/projekti',
     title: 'Projekti - Instalater Anđeo',
     description: 'Odrađene obnove kupaonica diljem Hrvatske.',
   },

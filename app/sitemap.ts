@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getProjects } from '@/lib/projects'
 
-const BASE = 'https://instalaterandeo.hr'
+const BASE = 'https://petrokov-andjeo.hr'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await getProjects()
