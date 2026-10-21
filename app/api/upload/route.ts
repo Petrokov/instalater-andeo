@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@/lib/supabase-server'
 import { requireAdmin } from '@/lib/admin-auth'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { hasValidImageSignature } from '@/lib/image-validation'
 
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? request.headers.get('x-real-ip') ?? 'unknown'
+  const ip = getClientIp(request.headers)
   if (!checkRateLimit(`upload:${ip}`, 20, 60 * 60 * 1000)) {
     return NextResponse.json({ error: 'Previše zahtjeva. Pokušajte ponovo za sat vremena.' }, { status: 429 })
   }

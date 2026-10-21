@@ -1,3 +1,7 @@
+export function toJsonLd(data: unknown) {
+  return JSON.stringify(data).replace(/</g, '\\u003c')
+}
+
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'NGO'],

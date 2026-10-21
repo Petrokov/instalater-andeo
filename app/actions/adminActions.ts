@@ -10,14 +10,14 @@ import {
   createAdminSessionToken,
   requireAdmin,
 } from '@/lib/admin-auth'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import type { PrijavaStatus } from '@/lib/database.types'
 
 const PRIJAVA_STATUSES: PrijavaStatus[] = ['nova', 'u-obradi', 'zavrsena', 'odbijena']
 
 export async function adminLogin(formData: FormData) {
   const headersList = await headers()
-  const ip = headersList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? headersList.get('x-real-ip') ?? 'unknown'
+  const ip = getClientIp(headersList)
   if (!checkRateLimit(`admin-login:${ip}`, 10, 15 * 60 * 1000)) {
     redirect('/admin/login?error=1')
   }

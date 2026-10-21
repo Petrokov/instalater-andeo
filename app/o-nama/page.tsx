@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { faqSchema } from '@/lib/schema'
+import { faqSchema, toJsonLd } from '@/lib/schema'
 import { ONameHeroSection } from '@/components/sections/o-nama/ONameHeroSection'
 import { MisijaVizija } from '@/components/sections/o-nama/MisijaVizija'
 import { KakoDjelujeSection } from '@/components/sections/o-nama/KakoDjelujeSection'
@@ -137,15 +137,15 @@ export default function ONamaPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(aboutPageSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(howToSchema) }}
       />
 
       <ONameHeroSection />
@@ -155,7 +155,7 @@ export default function ONamaPage() {
       <PrijavaSection contactHref="/#kontakt-trebam" />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(faqSchema) }}
       />
       <FaqSection />
       <CitatSection />

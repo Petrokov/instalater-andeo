@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getProjectBySlug, getProjects } from '@/lib/projects'
 import type { ProjectParticipant, ProjectPartner } from '@/lib/database.types'
+import { toJsonLd } from '@/lib/schema'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -93,11 +94,11 @@ export default async function ProjectDetailPage({ params }: Props) {
     <div>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(articleSchema) }}
       />
       {/* Cover hero */}
       <div className="relative bg-dark pt-[72px]">

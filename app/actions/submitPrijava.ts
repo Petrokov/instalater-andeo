@@ -3,7 +3,7 @@
 import { headers } from 'next/headers'
 import { createServerClient } from '@/lib/supabase-server'
 import type { PrijavaVrsta } from '@/lib/database.types'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { sendPrijavaNotification, sendPrijavaConfirmation } from '@/lib/email'
 import { hasValidImageSignature } from '@/lib/image-validation'
 
@@ -70,7 +70,7 @@ export async function submitPrijava(formData: FormData): Promise<SubmitResult> {
   }
 
   const headersList = await headers()
-  const ip = headersList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? headersList.get('x-real-ip') ?? 'unknown'
+  const ip = getClientIp(headersList)
   if (!checkRateLimit(`prijava:${ip}`, 5, 10 * 60 * 1000)) {
     return { success: false, error: 'Previše pokušaja. Pokušajte ponovo za nekoliko minuta.' }
   }
